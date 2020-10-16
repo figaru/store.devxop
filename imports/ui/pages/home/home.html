@@ -1,0 +1,181 @@
+<template name="App_home">
+  <header id="app_header">
+    <div class="navbar">
+      <div class="nav-col">
+        {{#if store.header.logo_image}}
+        <img src="">
+        {{else}}
+        <h1>{{store.name}}</h1>
+        {{/if}}
+      </div>
+      <div class="nav-col">
+        <div class="nav-item">
+          <span>Home</span>
+        </div>
+        <div class="nav-item">
+          <span>About</span>
+        </div>
+        <div class="nav-item">
+          <span>Contact</span>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-item">
+          <i class="material-icons">search</i>
+        </div>
+
+        <div class="nav-item">
+          <i class="material-icons">shopping_cart</i>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="app_body">
+    {{#each sectionId in get_page.sections}}
+    {{#let section=(get_section sectionId) }}
+    <section class="section-feature {{section.type}}">
+      {{#if type_is_equal section.type "image_with_text_overlay"}}
+      <div class="image-text-overlay">
+        <div class="image">
+          <img src="https://devxop.com/img/landing_bg.png">
+        </div>
+        <div class="overlay"></div>
+        <div class="text-content">
+          <div class="heading">
+            <h1>{{section.heading}}</h1>
+          </div>
+          <div class="text">
+            <h3>{{section.text}}</h3>
+          </div>
+        </div>
+      </div>
+      {{/if}}
+
+      {{#if type_is_equal section.type "image_with_text"}}
+      <div class="container">
+        <div class="image-text">
+          <div class="image">
+            <img src="https://devxop.com/img/landing_bg.png">
+          </div>
+          <div class="text-content">
+            <div class="heading">
+              <h3>{{section.heading}}</h3>
+            </div>
+            <div class="text">
+              <p>{{section.text}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {{/if}}
+
+      {{#if type_is_equal section.type "text_column_with_image"}}
+      <div class="container">
+        <div class="text-columns">
+          {{#each column in section.columns}}
+          <div class="column">
+            <div class="image">
+              <img src="https://devxop.com/img/landing_bg.png">
+            </div>
+            <div class="text-content">
+              <div class="heading">
+                <h4>{{column.heading}}</h4>
+              </div>
+              <div class="text">
+                <p>{{column.text}}</p>
+              </div>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+
+      {{/if}}
+
+      {{test}}
+
+      {{#if type_is_equal section.type "featured_collection"}}
+      <div class="container">
+        <!-- <div class="featured-collection">
+          {{#let collection=(get_collection section.collection) }}
+          <div class="heading">{{collection.heading}}</div>
+          
+          {{#each productId in collection.products}}
+            
+            {{#let product=(get_product productId)}}
+              {{product.title}}
+            {{/let}}
+          {{/each}}
+
+          {{/let}}
+        </div> -->
+        <div class="row">
+          <div class="col">
+            <h3 class="text-center mb-5">{{section.heading}}</h3>
+          </div>
+        </div>
+        {{#let collection=(get_collection section.collection) }}
+        <div class="row row-cols-2 row-cols-md-2 g-4">
+          {{#each productId in collection.products}}
+
+          {{#let product=(get_product productId)}}
+          <div class="col">
+            <div class="card border-0 rounder-0">
+              <img src="https://devxop.com/img/landing_bg.png" class="card-img-top" alt="...">
+              <div class="card-body pr-0 pl-0">
+                <h5 class="card-title">{{product.title}}</h5>
+                <p class="card-text">{{product.price}}</p>
+              </div>
+            </div>
+          </div>
+          {{/let}}
+          <!-- End get product LET -->
+
+          {{/each}}
+          <!-- End loop product ids EACH -->
+        </div>
+
+        {{/let}}
+        <!-- End get collection LET -->
+
+
+      </div>
+
+      {{/if}}
+
+      {{#if type_is_equal section.type "gallery"}}
+      <div class="container-gallery">
+        <div class="row row-cols-1 row-cols-md-3">
+          {{#each image in section.images}}
+          <div class="col">
+            <div class="card border-0 rounded-0 text-white" style="height: 364px;">
+              <img src="{{image.image}}" class="card-img" alt="..." style="object-fit: cover;
+              width: 100%;
+              height: 100%;">
+              {{#if image.caption}}
+              <div class="card-img-overlay d-flex flex-column justify-content-center align-items-center">
+                <h5 class="card-title">{{image.caption}}</h5>
+              </div>
+              {{/if}}
+            </div>
+          </div>
+
+          {{/each}}
+        </div>
+      </div>
+
+      {{/if}}
+
+
+    </section>
+    {{/let}}
+    {{/each}}
+  </div>
+
+
+
+  <footer id="app_footer">
+
+  </footer>
+</template>
