@@ -2,7 +2,7 @@ Meteor.methods({
     'collection.get':function(){
         return {
             _id: "collection1",
-            heading: "Collection 1",
+            title: "Collection 1",
             products: ["product1"],
         }
     },

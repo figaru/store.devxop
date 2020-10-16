@@ -87,6 +87,22 @@ Template.App_home.onRendered(function () {
 
     });
 
+    let sectionId6 = StoreSections.insert({
+        type: "collection_list",
+        heading: "Gallery",
+        collections: ["collection1", "collection1", "collection1","collection1"],
+        section_height: "lg", //centered 
+
+    });
+
+    let sectionId7 = StoreSections.insert({
+        type: "rich_text",
+        heading: "Talk About your brand",
+        text: "",
+        size: "lg", //lg - md - sm
+
+    });
+
     Stores.insert({
         name: "Devxop",
         endpoint: "test",
@@ -97,7 +113,7 @@ Template.App_home.onRendered(function () {
             menu: "", //adda menu id
         },
         pages: [
-            { name: "home", sections: [sectionId, sectionId2, sectionId3, sectionId4, sectionId5] },
+            { name: "home", sections: [sectionId, sectionId2, sectionId3, sectionId4, sectionId5, sectionId6] },
             { name: "test", sections: [] },
         ],
         footer: {
@@ -151,11 +167,15 @@ Template.App_home.helpers({
 
 
 const insertTempCollection = function (id) {
-    let product = TempCollections.findOne(id);
-    if (!product) {
+    let collection = TempCollections.findOne({"_id": id});
+    if (!collection) {
         Meteor.call("collection.get", function (err, data) {
-            if (!err && data)
-                TempCollections.insert(data);
+            if (!err && data){
+                delete data["_id"];
+                TempCollections.upsert({"_id": id}, {
+                    $set: data
+                });
+            }   
         });
     }
 }
@@ -164,8 +184,12 @@ const insertTempProduct = function (id) {
     let product = TempProducts.findOne(id);
     if (!product) {
         Meteor.call("product.get", function (err, data) {
-            if (!err && data)
-                TempProducts.insert(data);
+            if (!err && data){
+                delete data["_id"];
+                TempProducts.upsert({"_id": id}, {
+                    $set: data
+                });
+            }
         });
     }
 }
