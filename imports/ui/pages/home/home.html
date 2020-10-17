@@ -178,22 +178,46 @@
       {{/if}}
 
       {{#if type_is_equal section.type "rich_text"}}
-      <div class=" container collection-list">
-        <div class="row row-cols-2 row-cols-md-3">
-          {{#each collectionId in section.collections}}
-          {{#let collection=(get_collection collectionId)}}
-          <div class="col">
-            <div class="card border-0 rounded-0 text-white">
-              <div class="card-img" style="background-image: url('https://devxop.com/img/landing_bg.png');">
-                
-              </div>
-              <div class="card-img-overlay card-click d-flex flex-column justify-content-center align-items-center">
-                <h5 class="card-title">{{collection.title}}</h5>
+      <div class=" container rich-text">
+        <div class="row row-cols-1">
+          <div class="col"><h3 class="text-center">{{section.heading}}</h3></div>
+          <div class="col"><p class="text-center">{{section.text}}</p></div>
+        </div>
+      </div>
+
+      {{/if}}
+
+
+      {{#if type_is_equal section.type "slideshow"}}
+      <div class=" container-slideshow">
+        <div id="slideshow-{{section._id}}" class="carousel slide carousel-fade" data-ride="carousel">
+          <ol class="carousel-indicators">
+            {{#each slide in section.slides}}
+              <li data-target="#slideshow-{{section._id}}" data-slide-to="{{@index}}" class="{{is_first_slide @index}}"></li>
+            {{/each}}
+            
+            <!-- <li data-target="#carouselExampleDark" data-slide-to="1"></li>
+            <li data-target="#carouselExampleDark" data-slide-to="2"></li> -->
+          </ol>
+          <div class="carousel-inner">
+            {{#each slide in section.slides}}
+            <div class="carousel-item {{is_first_slide @index}}" data-interval="{{section.slide_interval}}">
+              <img src="{{slide.image}}" class="d-block w-100" alt="...">
+              <div class="carousel-caption {{section.text_alignment}}">
+                <h5>{{slide.heading}}</h5>
+                <p>{{slide.sub_heading}}</p>
               </div>
             </div>
+            {{/each}}
           </div>
-          {{/let}}
-          {{/each}}
+          <a class="carousel-control-prev" href="#slideshow-{{section._id}}" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#slideshow-{{section._id}}" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </a>
         </div>
       </div>
 

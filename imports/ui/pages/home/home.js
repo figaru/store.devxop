@@ -98,9 +98,24 @@ Template.App_home.onRendered(function () {
     let sectionId7 = StoreSections.insert({
         type: "rich_text",
         heading: "Talk About your brand",
-        text: "",
+        text: "Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.",
         size: "lg", //lg - md - sm
 
+    });
+
+    let sectionId8 = StoreSections.insert({
+        type: "slideshow",
+        slide_height: "md", //sm, lg
+        text_size: "md", //lg
+        text_alignment: "bottom-center",
+        show_overlay: true,
+        auto_rotate: true,
+        slide_interval: 5000,
+        slides:[
+            {image: "https://cdn.shopify.com/s/files/1/0497/8766/6596/files/vernazza-city-sunset_900x.jpg?v=1602852727", heading: "first slide", sub_heading: "this is a test subheading", button_label: "", button_link: ""},
+            /* {image: "https://cdn.shopify.com/s/files/1/0497/8766/6596/files/vernazza-city-sunset_900x.jpg?v=1602852727", heading: "second slide", sub_heading: "this is a test subheading", button_label: "", button_link: ""},
+            {image: "https://cdn.shopify.com/s/files/1/0497/8766/6596/files/vernazza-city-sunset_900x.jpg?v=1602852727", heading: "third slide", sub_heading: "this is a test subheading", button_label: "", button_link: ""}
+         */]
     });
 
     Stores.insert({
@@ -113,7 +128,7 @@ Template.App_home.onRendered(function () {
             menu: "", //adda menu id
         },
         pages: [
-            { name: "home", sections: [sectionId, sectionId2, sectionId3, sectionId4, sectionId5, sectionId6] },
+            { name: "home", sections: [sectionId, sectionId2, sectionId3, sectionId4, sectionId5, sectionId6, sectionId7, sectionId8] },
             { name: "test", sections: [] },
         ],
         footer: {
@@ -162,6 +177,11 @@ Template.App_home.helpers({
         //here we check that the section type is equal to compare query
         //section.type == "image_with_tex"
         return sectionType == expectedType;
+    },
+    is_first_slide: function(index){
+        //used to add active class to first slide 
+        //required to initialize carousel
+        return index == 0 ? "active" : "";
     }
 });
 
