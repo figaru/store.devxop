@@ -5,7 +5,7 @@
         {{#if store.header.logo_image}}
         <img src="">
         {{else}}
-        <h1>{{store.name}}</h1>
+        <h3>{{store.name}}</h3>
         {{/if}}
       </div>
       <div class="nav-col">
@@ -188,6 +188,23 @@
       {{/if}}
 
 
+      {{#if type_is_equal section.type "newsletter"}}
+      <div class="container container-newsletter">
+        <div class="row row-cols-1">
+          <div class="col"><h3 class="text-center">{{section.heading}}</h3></div>
+          <div class="col"><p class="text-center">{{section.sub_heading}}</p></div>
+          <div class="col">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Email address" aria-describedby="btn-submit-newsletter">
+              <button class="btn btn-outline-secondary" type="button" id="btn-submit-newsletter">Button</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {{/if}}
+
+
       {{#if type_is_equal section.type "slideshow"}}
       <div class=" container-slideshow">
         <div id="slideshow-{{section._id}}" class="carousel slide carousel-fade" data-ride="carousel">
@@ -204,8 +221,8 @@
             <div class="carousel-item {{is_first_slide @index}}" data-interval="{{section.slide_interval}}">
               <img src="{{slide.image}}" class="d-block w-100" alt="...">
               <div class="carousel-caption {{section.text_alignment}}">
-                <h5>{{slide.heading}}</h5>
-                <p>{{slide.sub_heading}}</p>
+                <h5 class="text-{{section.text_size}}">{{slide.heading}}</h5>
+                <p class="text-{{section.text_size}}">{{slide.sub_heading}}</p>
               </div>
             </div>
             {{/each}}
@@ -224,6 +241,31 @@
       {{/if}}
 
 
+      {{#if type_is_equal section.type "testimonials"}}
+      <div class="container-testimonials">
+        <div id="slideshow-{{section._id}}" class="carousel slide carousel-dark" data-ride="carousel" data-interval="false">
+          <ol class="carousel-indicators">
+            {{#each testimonial in section.testimonials}}
+              <li data-target="#slideshow-{{section._id}}" data-slide-to="{{@index}}" class="{{is_first_slide @index}}"></li>
+            {{/each}}
+          </ol>
+          <div class="carousel-inner">
+            {{#each testimonial in section.testimonials}}
+            <div class="carousel-item {{is_first_slide @index}}">
+              <div class="carousel-caption {{section.text_alignment}}">
+                <i class="material-icons">format_quote</i>
+                <h5 class="text-{{section.text_size}}">{{testimonial.text}}</h5>
+                <p class="text-{{section.text_size}}">- {{testimonial.author}}</p>
+              </div>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+
+      {{/if}}
+
+
     </section>
     {{/let}}
     {{/each}}
@@ -232,6 +274,20 @@
 
 
   <footer id="app_footer">
-
+    <hr>
+    <div class="container container-footer">
+      <div class="row row-cols-3 row-cols-md-1">
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+      </div>
+    </div>
+    <hr>
+    <div class="container container-footer">
+      <div class="row row-cols-1">
+        <div class="col text-center">Payment Stripe</div>
+        <div class="col text-center">© 2020, {{store.name}} Powered by Devxop</div>
+      </div>
+    </div>
   </footer>
 </template>

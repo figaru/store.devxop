@@ -106,7 +106,7 @@ Template.App_home.onRendered(function () {
     let sectionId8 = StoreSections.insert({
         type: "slideshow",
         slide_height: "md", //sm, lg
-        text_size: "md", //lg
+        text_size: "lg", //lg
         text_alignment: "bottom-center",
         show_overlay: true,
         auto_rotate: true,
@@ -116,6 +116,22 @@ Template.App_home.onRendered(function () {
             /* {image: "https://cdn.shopify.com/s/files/1/0497/8766/6596/files/vernazza-city-sunset_900x.jpg?v=1602852727", heading: "second slide", sub_heading: "this is a test subheading", button_label: "", button_link: ""},
             {image: "https://cdn.shopify.com/s/files/1/0497/8766/6596/files/vernazza-city-sunset_900x.jpg?v=1602852727", heading: "third slide", sub_heading: "this is a test subheading", button_label: "", button_link: ""}
          */]
+    });
+
+    let sectionId9 = StoreSections.insert({
+        type: "testimonials",
+        heading: "Testimonials",
+        testimonials: [
+            {text: "Add customer reviews and testimonials to showcase your store’s happy customers.", author: "Author's Name"},
+            {text: "Add customer reviews and testimonials to showcase your store’s happy customers.", author: "Author's Name"}
+        ]
+    });
+
+
+    let sectionId10 = StoreSections.insert({
+        type: "newsletter",
+        heading: "Subscribe to our newsletter",
+        sub_heading: "Promotions, new products and sales. Directly to your inbox."
     });
 
     Stores.insert({
@@ -128,7 +144,10 @@ Template.App_home.onRendered(function () {
             menu: "", //adda menu id
         },
         pages: [
-            { name: "home", sections: [sectionId, sectionId2, sectionId3, sectionId4, sectionId5, sectionId6, sectionId7, sectionId8] },
+            { name: "home", sections: [
+                sectionId, sectionId2, sectionId3, sectionId4, 
+                sectionId5, sectionId6, sectionId7, 
+                sectionId8, sectionId9, sectionId10] },
             { name: "test", sections: [] },
         ],
         footer: {
